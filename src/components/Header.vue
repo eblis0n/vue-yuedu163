@@ -70,8 +70,8 @@ header{
   }
   i{
     position: absolute;
-    left:2px;
-    top:2px;
+    left: 2px;
+    top: 2px;
     display: block;
     width: 4em;
     height: 26px;
@@ -80,10 +80,10 @@ header{
     z-index: 98;
     transition: transform .2s ease-in-out;
     &.active2{
-      transform: translate(58px, 0);
+      transform: translate(120%, 0);
     }
     &.active3{
-      transform: translate(116px, 0);
+      transform: translate(240%, 0);
     }
   }
 }

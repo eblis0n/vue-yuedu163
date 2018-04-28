@@ -18,6 +18,13 @@
       </ul>
       <i :class="[ 'active' + type]"></i>
     </nav>
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" v-for="(item, index) in 3" :key="index"  :style="{ background: 'url(' + backgroundImg + ') no-repeat', backgroundSize: 'cover' }">Slide {{index}}</div>
+      </div>
+      <!-- 如果需要分页器 -->
+      <div class="swiper-pagination"></div>
+    </div>
     <div class="cate" :style="{ '-webkit-filter: blur(5px)' : isShowSidebar }" v-for="(item, index) in 3" :key="index">
       <div class="cate-title">
         <h1>| 本周强推荐</h1>
@@ -45,12 +52,15 @@
 <script>
 import { mapState } from 'vuex'
 import Header from '@/components/Header'
+import Swiper from 'swiper'
+import 'swiper/dist/css/swiper.min.css'
 export default {
   data () {
     return {
       local: '1',
       type: 1,
-      isShowSidebar: false
+      isShowSidebar: false,
+      backgroundImg: require('@/assets/images/book2.png')
     }
   },
   components: {
@@ -71,12 +81,20 @@ export default {
     },
     ...mapState({
     })
+  },
+  mounted () {
+    var swiper = new Swiper('.swiper-container', {
+      loop: true,
+      autoplay: 1000, // 可选选项，自动滑动
+      // 如果需要分页器
+      pagination: '.swiper-pagination'
+    })
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="less" scoped>
+<style lang="less">
 .mask,.sidebar{
   position: fixed;
   top:0;
@@ -86,9 +104,6 @@ export default {
   right: 0;
   bottom: 0;
   opacity: 0;
-  // opacity: .5;
-  // z-index: 9999;
-  // background: #000;
   pointer-events: none;
   transition: opacity .2s ease-in-out;
   &.show{
@@ -163,6 +178,18 @@ export default {
       left: 91.6666%;
     }
   }
+}
+.swiper-container {
+    width: 100%;
+    height: 3.2rem;
+}
+.swiper-pagination-bullet{
+  width: 10px;
+  height: 4px;
+  border-radius: 0;
+}
+.swiper-pagination-bullet-active{
+  background: #fff;
 }
 .cate{
   margin: 0 4%;
